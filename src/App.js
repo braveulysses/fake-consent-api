@@ -1,7 +1,7 @@
 import jsonServer from 'json-server';
 import morgan from 'morgan';
-import User from './models/User';
 
+const port = process.env.PORT || "8080";
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults({
@@ -29,7 +29,7 @@ server.get('/', (request, response) => {
   });
 })
 server.use('/api', router);
-server.listen(3000, () => {
+server.listen(port, () => {
   console.log("Listening to port 3000");
 })
 
