@@ -1,0 +1,110 @@
+html
+  head
+    title Example User Consent API
+    link(rel='stylesheet' href='/css/styles.css')
+    link(rel='stylesheet' href='/css/mono-blue.css')
+  body
+    h1 Example User Consent API
+    table
+      tr
+        td API root
+        td
+          code https://fake-consent-api.glitch.me/api/consents
+      tr
+        td Source code
+        td
+          code https://glitch.com/edit/#!/fake-consent-api
+    
+    p This is a simple example REST API, loosely based on the 
+      a(href='https://apidocs.pingidentity.com/pingdirectory/consent/v1/api/guide/') Ping Identity Consent API
+      | .
+    
+    h2 How to use
+    p Currently, no authentication is required.
+    
+    p By default, a GET request to 
+      tt /api/consents 
+      | returns a JSON array of all consent records.
+    
+    p You can constrain the search by providing an attribute-based filter. For example: 
+      tt  /api/consents?subject=:subject
+      |, where
+      tt  :subject
+      |  is a subject ID like "4b5b5031-3eee-4ae0-af48-e2dc551db1f3".
+    p Example response:
+    pre
+      code.hljs
+        :highlight(lang="json", style="Mono Blue")
+
+          [
+            {
+              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "audience": "healthcare-app",
+              "createdDate": "2022-05-10T14:54:23.245Z",
+              "dataText": "Your private health care data",
+              "data": {
+                "username": "user.1"
+              },
+              "definition": {
+                "currentVersion": "1.0",
+                "id": "healthcare",
+                "locale": "en-US",
+                "version": "1.0"
+              },
+              "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
+              "purposeText": "View and manage your health care data",
+              "status": "accepted",
+              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "updatedDate": "2022-05-11T14:54:23.245Z"
+            },
+            {
+              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "audience": "banking-app",
+              "createdDate": "2021-04-29T14:54:23.245Z",
+              "dataText": "Your banking accounts",
+              "data": {
+                "username": "user.1"
+              },
+              "definition": {
+                "currentVersion": "1.1",
+                "id": "banking",
+                "locale": "en-US",
+                "version": "1.0"
+              },
+              "id": "e0fcd0d6-b774-4d48-8766-d80c7b3cb9fc",
+              "purposeText": "View and manage your banking data",
+              "status": "revoked",
+              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "updatedDate": "2021-11-13T14:54:23.245Z"
+            }
+          ]
+          
+    p You can use multiple terms to further constrain a search. 
+      | For example, to return 'healthcare' consents only, make a request like the following:  
+      tt  /api/consents?subject=:subject&definition.id=healthcare
+    p The response will be:
+    pre
+      code.hljs
+        :highlight(lang="json", style="Mono Blue")
+          [
+            {
+              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "audience": "healthcare-app",
+              "createdDate": "2022-05-10T14:54:23.245Z",
+              "dataText": "Your private health care data",
+              "data": {
+                "username": "user.1"
+              },
+              "definition": {
+                "currentVersion": "1.0",
+                "id": "healthcare",
+                "locale": "en-US",
+                "version": "1.0"
+              },
+              "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
+              "purposeText": "View and manage your health care data",
+              "status": "accepted",
+              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "updatedDate": "2022-05-11T14:54:23.245Z"
+            }
+          ]
