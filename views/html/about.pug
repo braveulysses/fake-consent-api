@@ -14,7 +14,7 @@ html(lang='en')
       tr
         td Source code
         td
-          code https://glitch.com/edit/#!/fake-consent-api
+          code https://github.com/braveulysses/fake-consent-api
     
     p This is a simple example REST API, loosely based on the 
       a(href='https://apidocs.pingidentity.com/pingdirectory/consent/v1/api/guide/') Ping Identity Consent API
@@ -26,7 +26,9 @@ html(lang='en')
       dt Consent
       dd A record of a user's consent to share data with another party.
       dt Definition
-      dd A type of consent.
+      dd A type of consent; i.e., what a consent is
+        em  for
+        | .
       dt Subject
       dd The user whose data is being shared.
       dt Actor
@@ -34,13 +36,13 @@ html(lang='en')
       dt Audience
       dd The party who can access the data being shared.
       dt Status
-      dd The status of the consent record. Possible values include:
-        ul
-          li accepted
-          li denied
-          li revoked
-          li restricted
-    
+      dd The status of the consent record. Possible values include
+        em  accepted,
+        em  denied,
+        em  revoked,
+        |  and
+        em  restricted.
+
     h2 Limitations of this API
 
     ul
@@ -51,17 +53,17 @@ html(lang='en')
     p Currently, no authentication is required.
 
     p All responses are JSON and use the
-      code application/json
-      | content-type.
+      code  application/json
+      |  content-type.
 
-    h3. Retrieve all consent records
+    h3 Retrieve all consent records
     
     p By default, a GET request to
-      code /api/consents
-      | returns a JSON array of all consent records.
-      | Use this to see all available sample data.
+      code  /api/consents
+      |  returns a JSON array of all consent records.
+      |  Use this to see all available sample data.
 
-    h3. Filter consent records
+    h3 Filter consent records
     
     p You can constrain the search by providing an attribute-based filter. For example:
       code  /api/consents?subject=:subject
@@ -108,49 +110,22 @@ html(lang='en')
             }
           ]
 
-      p You can use multiple terms to further constrain a search.
-        | For example, to only return 'healthcare' consents that the subject has accepted,
-        | make a request like the following:
-        code  /api/consents?subject=:subject&definition.id=healthcare&status=accepted
-      p The response will be:
-      pre
-        code.hljs
-          :highlight(lang="json", style="Mono Blue")
-            [
-              {
-                "actor": "user.1",
-                "audience": "healthcare-app",
-                "createdDate": "2022-05-10T14:54:23.245Z",
-                "dataText": "Your private health care data",
-                "definition": {
-                  "id": "healthcare",
-                  "locale": "en-US",
-                  "version": "1.0"
-                },
-                "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
-                "purposeText": "View and manage your health care data",
-                "status": "accepted",
-                "subject": "user.1",
-                "updatedDate": "2022-05-11T14:54:23.245Z"
-              }
-            ]
+    p You can use multiple terms to further constrain a search.
+      |  For example, to only return 'healthcare' consents that the subject has accepted,
+      |  make a request like the following:
+      code  /api/consents?subject=:subject&definition.id=healthcare&status=accepted
 
-    h3 Retrieve single consent record
-
-      p You can also retrieve a single consent record by ID.
-        | For example:
-        code /api/consents/1fafb2cb-9eec-4cd1-8639-ae0396e1b728
-      p The response will be:
-      pre
-        code.hljs
-          :highlight(lang="json", style="Mono Blue")
+    p Example response:
+    pre
+      code.hljs
+        :highlight(lang="json", style="Mono Blue")
+          [
             {
               "actor": "user.1",
               "audience": "healthcare-app",
               "createdDate": "2022-05-10T14:54:23.245Z",
               "dataText": "Your private health care data",
               "definition": {
-                "currentVersion": "1.0",
                 "id": "healthcare",
                 "locale": "en-US",
                 "version": "1.0"
@@ -161,4 +136,33 @@ html(lang='en')
               "subject": "user.1",
               "updatedDate": "2022-05-11T14:54:23.245Z"
             }
+          ]
+
+    h3 Retrieve single consent record
+
+    p You can also retrieve a single consent record by ID.
+      |  For example:
+      code  /api/consents/1fafb2cb-9eec-4cd1-8639-ae0396e1b728
+
+    p Example response:
+    pre
+      code.hljs
+        :highlight(lang="json", style="Mono Blue")
+          {
+            "actor": "user.1",
+            "audience": "healthcare-app",
+            "createdDate": "2022-05-10T14:54:23.245Z",
+            "dataText": "Your private health care data",
+            "definition": {
+              "currentVersion": "1.0",
+              "id": "healthcare",
+              "locale": "en-US",
+              "version": "1.0"
+            },
+            "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
+            "purposeText": "View and manage your health care data",
+            "status": "accepted",
+            "subject": "user.1",
+            "updatedDate": "2022-05-11T14:54:23.245Z"
+          }
 

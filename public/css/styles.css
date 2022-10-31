@@ -17,5 +17,31 @@ th, td {
 
 pre {
   min-width: 300px;
-/*   width: 30%; */
+}
+
+dl:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+dt {
+  font-weight: bold;
+  color: #0048ab;
+  float: left;
+  width: 10%;
+  text-align: right;
+  padding: 3px;
+  padding-bottom: 10px;
+  clear: left;
+}
+
+dt::after {
+  content: ":";
+}
+
+dd {
+  float: left;
+  width: 65%;
+  padding: 3px 0;
 }
