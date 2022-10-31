@@ -6,13 +6,16 @@ body {
 
 table {
   border-collapse: collapse;
-  border: 1px solid #CCCCCC;
+  border: 1px #002b36;
   min-width: 300px;
-/*   width: 30%; */
 }
 
 th, td {
   padding: 5px;
+}
+
+th {
+  color: #586e75;
 }
 
 pre {
@@ -27,21 +30,17 @@ dl:after {
 
 dt {
   font-weight: bold;
-  color: #0048ab;
+  color: #586e75;
   float: left;
-  width: 10%;
+  width: 15%;
   text-align: right;
   padding: 3px;
   padding-bottom: 10px;
   clear: left;
 }
 
-dt::after {
-  content: ":";
-}
-
 dd {
   float: left;
-  width: 65%;
+  width: 70%;
   padding: 3px 0;
 }
