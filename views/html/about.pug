@@ -1,4 +1,5 @@
-html
+doctype html
+html(lang='en')
   head
     title Example User Consent API
     link(rel='stylesheet' href='/css/styles.css')
@@ -9,7 +10,7 @@ html
       tr
         td API root
         td
-          code https://fake-consent-api.glitch.me/api/consents
+          code https://fake-consent-api.fly.dev/api/consents
       tr
         td Source code
         td
@@ -18,33 +19,65 @@ html
     p This is a simple example REST API, loosely based on the 
       a(href='https://apidocs.pingidentity.com/pingdirectory/consent/v1/api/guide/') Ping Identity Consent API
       | .
+
+    h2 Consent API terms
+
+    dl
+      dt Consent
+      dd A record of a user's consent to share data with another party.
+      dt Definition
+      dd A type of consent.
+      dt Subject
+      dd The user whose data is being shared.
+      dt Actor
+      dd The user or client who actually granted the consent. Usually the same user as the subject.
+      dt Audience
+      dd The party who can access the data being shared.
+      dt Status
+      dd The status of the consent record. Possible values include:
+        ul
+          li accepted
+          li denied
+          li revoked
+          li restricted
     
-    h2 How to use
+    h2 Limitations of this API
+
+    ul
+      li Authentication is not supported.
+      li Create and update operations are not supported. The API is preloaded with limited sample data.
+
+    h2 Usage
     p Currently, no authentication is required.
+
+    p All responses are JSON and use the
+      code application/json
+      | content-type.
+
+    h3. Retrieve all consent records
     
-    p By default, a GET request to 
-      tt /api/consents 
+    p By default, a GET request to
+      code /api/consents
       | returns a JSON array of all consent records.
+      | Use this to see all available sample data.
+
+    h3. Filter consent records
     
-    p You can constrain the search by providing an attribute-based filter. For example: 
-      tt  /api/consents?subject=:subject
+    p You can constrain the search by providing an attribute-based filter. For example:
+      code  /api/consents?subject=:subject
       |, where
-      tt  :subject
-      |  is a subject ID like "4b5b5031-3eee-4ae0-af48-e2dc551db1f3".
+      code  :subject
+      |  is a subject ID like "user.1".
     p Example response:
     pre
       code.hljs
         :highlight(lang="json", style="Mono Blue")
-
           [
             {
-              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "actor": "user.1",
               "audience": "healthcare-app",
               "createdDate": "2022-05-10T14:54:23.245Z",
               "dataText": "Your private health care data",
-              "data": {
-                "username": "user.1"
-              },
               "definition": {
                 "currentVersion": "1.0",
                 "id": "healthcare",
@@ -54,47 +87,68 @@ html
               "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
               "purposeText": "View and manage your health care data",
               "status": "accepted",
-              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "subject": "user.1",
               "updatedDate": "2022-05-11T14:54:23.245Z"
             },
             {
-              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
-              "audience": "banking-app",
-              "createdDate": "2021-04-29T14:54:23.245Z",
-              "dataText": "Your banking accounts",
-              "data": {
-                "username": "user.1"
-              },
+              "actor": "user.1",
+              "audience": "legacy-healthcare-app",
+              "createdDate": "2021-05-10T14:54:23.245Z",
+              "dataText": "Your private health care data",
               "definition": {
-                "currentVersion": "1.1",
-                "id": "banking",
+                "id": "healthcare",
                 "locale": "en-US",
                 "version": "1.0"
               },
-              "id": "e0fcd0d6-b774-4d48-8766-d80c7b3cb9fc",
-              "purposeText": "View and manage your banking data",
+              "id": "d105686c-c745-4d83-ad18-b3ab7c49c13e",
+              "purposeText": "View and manage your health care data",
               "status": "revoked",
-              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
-              "updatedDate": "2021-11-13T14:54:23.245Z"
+              "subject": "user.1",
+              "updatedDate": "2022-01-11T14:54:23.245Z"
             }
           ]
-          
-    p You can use multiple terms to further constrain a search. 
-      | For example, to return 'healthcare' consents only, make a request like the following:  
-      tt  /api/consents?subject=:subject&definition.id=healthcare
-    p The response will be:
-    pre
-      code.hljs
-        :highlight(lang="json", style="Mono Blue")
-          [
+
+      p You can use multiple terms to further constrain a search.
+        | For example, to only return 'healthcare' consents that the subject has accepted,
+        | make a request like the following:
+        code  /api/consents?subject=:subject&definition.id=healthcare&status=accepted
+      p The response will be:
+      pre
+        code.hljs
+          :highlight(lang="json", style="Mono Blue")
+            [
+              {
+                "actor": "user.1",
+                "audience": "healthcare-app",
+                "createdDate": "2022-05-10T14:54:23.245Z",
+                "dataText": "Your private health care data",
+                "definition": {
+                  "id": "healthcare",
+                  "locale": "en-US",
+                  "version": "1.0"
+                },
+                "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
+                "purposeText": "View and manage your health care data",
+                "status": "accepted",
+                "subject": "user.1",
+                "updatedDate": "2022-05-11T14:54:23.245Z"
+              }
+            ]
+
+    h3 Retrieve single consent record
+
+      p You can also retrieve a single consent record by ID.
+        | For example:
+        code /api/consents/1fafb2cb-9eec-4cd1-8639-ae0396e1b728
+      p The response will be:
+      pre
+        code.hljs
+          :highlight(lang="json", style="Mono Blue")
             {
-              "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "actor": "user.1",
               "audience": "healthcare-app",
               "createdDate": "2022-05-10T14:54:23.245Z",
               "dataText": "Your private health care data",
-              "data": {
-                "username": "user.1"
-              },
               "definition": {
                 "currentVersion": "1.0",
                 "id": "healthcare",
@@ -104,7 +158,7 @@ html
               "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
               "purposeText": "View and manage your health care data",
               "status": "accepted",
-              "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+              "subject": "user.1",
               "updatedDate": "2022-05-11T14:54:23.245Z"
             }
-          ]
+

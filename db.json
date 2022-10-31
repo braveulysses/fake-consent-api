@@ -1,15 +1,11 @@
 {
   "consents": [
     {
-      "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+      "actor": "user.1",
       "audience": "healthcare-app",
       "createdDate": "2022-05-10T14:54:23.245Z",
       "dataText": "Your private health care data",
-      "data": {
-        "username": "user.1"
-      },
       "definition": {
-        "currentVersion": "1.0",
         "id": "healthcare",
         "locale": "en-US",
         "version": "1.0"
@@ -17,19 +13,47 @@
       "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
       "purposeText": "View and manage your health care data",
       "status": "accepted",
-      "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+      "subject": "user.1",
       "updatedDate": "2022-05-11T14:54:23.245Z"
     },
     {
-      "actor": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+      "actor": "user.1",
+      "audience": "legacy-healthcare-app",
+      "createdDate": "2021-05-10T14:54:23.245Z",
+      "dataText": "Your private health care data",
+      "definition": {
+        "id": "healthcare",
+        "locale": "en-US",
+        "version": "1.0"
+      },
+      "id": "d105686c-c745-4d83-ad18-b3ab7c49c13e",
+      "purposeText": "View and manage your health care data",
+      "status": "revoked",
+      "subject": "user.1",
+      "updatedDate": "2022-01-11T14:54:23.245Z"
+    },
+    {
+      "actor": "user.1",
+      "audience": "home-automator",
+      "createdDate": "2022-03-18T10:21:20.143Z",
+      "dataText": "Information about your home's smart devices",
+      "definition": {
+        "id": "smarthome",
+        "locale": "en-US",
+        "version": "1.1"
+      },
+      "id": "1fafb2cb-9eec-4cd1-8639-ae0396e1b728",
+      "purposeText": "View and manage your home's smart devices",
+      "status": "accepted",
+      "subject": "user.1",
+      "updatedDate": "2022-10-09T11:34:23.245Z"
+    },
+    {
+      "actor": "user.1",
       "audience": "banking-app",
       "createdDate": "2021-04-29T14:54:23.245Z",
       "dataText": "Your banking accounts",
-      "data": {
-        "username": "user.1"
-      },
       "definition": {
-        "currentVersion": "1.1",
         "id": "banking",
         "locale": "en-US",
         "version": "1.0"
@@ -37,19 +61,15 @@
       "id": "e0fcd0d6-b774-4d48-8766-d80c7b3cb9fc",
       "purposeText": "View and manage your banking data",
       "status": "revoked",
-      "subject": "4b5b5031-3eee-4ae0-af48-e2dc551db1f3",
+      "subject": "user.1",
       "updatedDate": "2021-11-13T14:54:23.245Z"
     },
     {
-      "actor": "f3c4b4b7-7592-4ec0-aa31-7e58603386e8",
+      "actor": "user.2",
       "audience": "healthcare-app",
       "createdDate": "2022-06-19T14:54:23.245Z",
       "dataText": "Your private health care data",
-      "data": {
-        "username": "user.2"
-      },
       "definition": {
-        "currentVersion": "1.0",
         "id": "healthcare",
         "locale": "en-US",
         "version": "1.0"
@@ -57,11 +77,11 @@
       "id": "ace7479c-b80a-446b-bfee-8d489a946560",
       "purposeText": "View and manage your health care data",
       "status": "denied",
-      "subject": "f3c4b4b7-7592-4ec0-aa31-7e58603386e8",
+      "subject": "user.2",
       "updatedDate": "2022-07-10T14:54:23.245Z"
     },
     {
-      "actor": "76f7335c-1077-4eb6-92d4-515b6f1b67f3",
+      "actor": "user.3",
       "audience": "healthcare-app",
       "createdDate": "2022-09-01T14:54:23.245Z",
       "dataText": "Your private health care data",
@@ -69,7 +89,6 @@
         "username": "user.3"
       },
       "definition": {
-        "currentVersion": "1.0",
         "id": "healthcare",
         "locale": "en-US",
         "version": "1.0"
@@ -77,7 +96,7 @@
       "id": "a0cc0cf7-11a7-4400-986e-0887f8168599",
       "purposeText": "View and manage your health care data",
       "status": "accepted",
-      "subject": "76f7335c-1077-4eb6-92d4-515b6f1b67f3",
+      "subject": "user.3",
       "updatedDate": "2022-10-05T14:54:23.245Z"
     }
   ]
